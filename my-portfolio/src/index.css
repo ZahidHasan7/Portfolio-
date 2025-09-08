@@ -4,8 +4,8 @@
 
 :root {
     --bg-color: #050816;
-    --primary-color: #915eff;
-    --secondary-color: #c7d2fe;
+    --primary-color: #22d3ee; /* Changed to cyan */
+    --secondary-color: #9ca3af; /* Changed to a soft gray */
     --text-color: #e2e8f0;
     --card-bg: #100d25;
 }
@@ -120,3 +120,4 @@ body {
     background-color: var(--card-bg);
     border: 3px solid var(--primary-color);
 }
+
