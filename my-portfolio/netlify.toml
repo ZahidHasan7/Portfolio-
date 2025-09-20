@@ -1,4 +1,8 @@
+# This file tells Netlify how to build your site.
 [build]
-  base    = "/"
+  # IMPORTANT: If your project is in a subfolder in GitHub, 
+  # change "my-portfolio" to the name of your folder.
+  base    = "my-portfolio"
   command = "npm install && npm run build"
   publish = "dist"
+
