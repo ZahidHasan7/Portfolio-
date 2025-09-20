@@ -1,7 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
  
 import profileImg from "./assets/profile.jpg";
+
+import  Asif from "./assets/Asif.jpg";
+
+import  Sharif from "./assets/Sharif.jpg";
 import connect from"./assets/connect.png";
+import MessEaseImg from './assets/MessEase.webp';
+import PsycareImg from './assets/PhyCare.webp';
+
+import AIShomachar from './assets/AI-Shomachar.webp';
+import BookRecomendation from './assets/BookRecomendation (1).webp';
+import contexify from './assets/contexify.png';
 // --- Gemini API Helper Function ---
 // A utility to call the Gemini API.
 // NOTE: The API key is intentionally left as an empty string.
@@ -140,8 +150,12 @@ const AnimatedBackground = () => {
         let animationFrameId;
 
         const CodeSymbols = [
-            '{ }', '< />', '( )', '[ ]', '=>', '===', '!==', '&&', '||', 'fn', 'var', 'let', 'const', 
-            'class', 'import', 'export', 'async', 'await', 'return', 'if', 'else', 'for', 'while', 
+            '{ }', '< />', '( )', '[ ]', '=>', '===', '!==',   '==', '!=', '>=', '<=', '?:', '??',  '|', '&', '^', '~', '<<', '>>',  '::', '=>', '<>','&&', '||', 'fn', 'var', 'let', 'const', 
+            'class', 'import', 'export', 'async', 'await', 'return', 'if', 'else', 'for', 'while', 'OOP', 'Functional', 'Array', 'Stack', 'Queue', 'Tree', 'Graph', 'HashMap', 'Recursion',
+  'DP', 'Greedy', 'DFS', 'BFS', 'Binary Search', 'AWS','REST', 'GraphQL', 'API', 'Callback', 'case', 'break', 'continue', 'try', 'catch', 'finally', 'throw', 'new', 'this',
+  'super', 'extends', 'implements', 'interface', 'public', 'private', 'protected', 'static',
+  'Algorithm', 'Bug', 'Debug', 'Deploy', 'Build', 'Test', 'SQL', 'MySQL', 'PostgreSQL', 'MongoDB','NPM', 'Yarn', 'Vite', 'Webpack', 'Firebase',
+
             'React', 'Vue', 'Angular', 'Node', 'Git', 'Docker'
         ];
 
@@ -465,30 +479,51 @@ const projectsData = [
     {
         title: "PsyCare",
         subtitle: "Mental Health Platform",
+           // liveLink: "#",
+        githubLink: "#",
         description: "A comprehensive mental wellness platform offering anonymous problem-sharing, AI-powered insights, and private video sessions with verified mental health professionals.",
         tags: ["react.js", "express.js", "node.js", "mongoDB", "mongoose", "jwt", "tailwind css", "vite", "webrtc", "openapi", "figma"],
-        image: "https://placehold.co/600x400/100d25/ffffff?text=PhyCare",
-        liveLink: "#",
-        githubLink: "#",
+        image: PsycareImg,
+       // liveLink: "",
+        githubLink: "https://github.com/ZahidHasan7/Psycare",
     },
     {
         title: "MessEase",
         subtitle: "Multi-Tenant Mess Management Platform",
         description: "MessEase simplifies meal and expense tracking for shared living. A manager-centric system where managers handle entries, and members view transparent reports. No paperwork, no hassle.",
         tags: ["react.js", "express.js", "node.js", "mongoDB", "mongoose", "jwt"],
-        image: "https://placehold.co/600x400/100d25/ffffff?text=MessEase",
-        liveLink: "#",
-        githubLink: "#",
+        image: MessEaseImg,
+        liveLink: "https://mess-easy.vercel.app/",
+        githubLink: "https://github.com/ZahidHasan7/MessEase-A_mess_management_system",
     },
     {
-        title: "E-commerce Platform",
-        subtitle: "Full-Stack Retail Solution",
-        description: "A complete e-commerce site with product listings, a fully functional shopping cart, and robust user authentication. Built for scale and performance.",
-        tags: ["React", "Node.js", "MongoDB", "Redux", "Stripe"],
-        image: "https://placehold.co/600x400/100d25/ffffff?text=E-commerce",
-        liveLink: "#",
-        githubLink: "#",
-    },
+  title: "Book Recommender System",
+  subtitle: "AI-Powered Book Recommendation System",
+  description: "A web application that suggests books using popularity-based and collaborative filtering models, built with Python, Flask, and Scikit-learn.",
+  tags: ["Python", "Flask", "Pandas", "Scikit-learn", "Render"],
+  image: BookRecomendation, // You'll need to import an image for this
+  liveLink: "https://book-recommender-system-v20n.onrender.com/",
+  githubLink: "https://github.com/ZahidHasan7/Book_Recommender_System.git",
+},
+    {
+        title: "AI-Shomachar",
+        subtitle: "AI-Powered SaaS Content Generation Platform",
+        description: "AI-Shomachar is a full-stack MERN application for text, code, and content generation. It features a custom JWT-based authentication system and integrates LLM APIs for AI-driven functionalities",
+      tags: ["React", "Express.js", "Node.js", "MongoDB", "JWT", "LLM APIs", "Tailwind CSS"],
+
+        image: AIShomachar,
+        liveLink: "",
+        githubLink: "https://github.com/TOWHID16/AI_Shomachar",
+    }, 
+    {
+  title: "Contextify",
+  subtitle: "AI-Powered Context Extension for Chrome",
+  description: "Get instant, AI-generated summaries and context for any highlighted text on a webpage without leaving your tab.",
+  tags: ["Chrome Extension", "Manifest V3", "JavaScript", "Gemini API", "Marked.js"],
+  image:contexify, // You'll need to import an image for this
+  liveLink: "", // Add the Chrome Web Store link here when published
+  githubLink: "https://github.com/ZahidHasan7/Contextify-extention-.git",
+}
 ];
 
 const Projects = () => (
@@ -536,23 +571,23 @@ const Projects = () => (
 
 
 const testimonialsData = [
-    {
-        quote: "Zahid is an outstanding developer who always delivers beyond expectations! He quickly understands project needs, suggests smart improvements, and implements them flawlessly. His dedication and attention to detail make the process smooth and stress-free.",
-        name: "Nafi Ullah Shafin",
-        title: "Software Engineer, App-Concept.com GmbH",
-        image: "https://placehold.co/150x150/100d25/ffffff?text=Nafi"
-    },
+    // {
+    //     quote: "Zahid is an outstanding developer who always delivers beyond expectations! He quickly understands project needs, suggests smart improvements, and implements them flawlessly. His dedication and attention to detail make the process smooth and stress-free.",
+    //     name: "Nafi Ullah Shafin",
+    //     title: "Software Engineer, App-Concept.com GmbH",
+    //     image: "https://placehold.co/150x150/100d25/ffffff?text=Nafi"
+    // },
     {
         quote: "Working with Zahid was a fantastic experience. His technical skills and creative problem-solving were instrumental in our project's success. He's a true professional and a great team player.",
-        name: "Jane Doe",
-        title: "Project Manager, Tech Solutions",
-        image: "https://placehold.co/150x150/100d25/ffffff?text=Jane"
+        name: "Towhidur Rahman Asif",
+        title: "Teammate",
+        image:  Asif
     },
     {
         quote: "The quality of work delivered was exceptional. Zahid has a keen eye for design and writes clean, efficient code. I would highly recommend him for any frontend development role.",
-        name: "John Smith",
-        title: "Lead Designer, Creative Agency",
-        image: "https://placehold.co/150x150/100d25/ffffff?text=John"
+        name: "Sahidur Rahman Sharif",
+        title: "Teammate",
+        image: Sharif
     }
 ];
 
@@ -608,24 +643,26 @@ const Artifacts = () => {
     const terminalBodyRef = useRef(null);
 
     const commands = useRef({
-        'help': 'Available commands: help, ls, resume, certs, clear, ask',
+        'help': 'Available commands: help, ls, resume, certificates, clear, ask',
         'ls': `
             <p><span class="text-blue-400">./documents/</span></p>
-            <p class="ml-4"><a href="https://drive.google.com/file/d/1TF89ERj2f18dSbctS-svVtLqr37uKYpr/view?usp=sharing" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">zahid_hasan_resume_2024.pdf</a></p>
+            <p class="ml-4"><a href="https://drive.google.com/file/d/1TF89ERj2f18dSbctS-svVtLqr37uKYpr/view?usp=sharing" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">M._M._Zahid_Hasan_resume.pdf</a></p>
             <p><span class="text-blue-400">./certificates/</span></p>
-            <p class="ml-4"><a href="https://drive.google.com/file/d/1-L3bS-9v0Y4t5i2P5i4j3k2l2m1n0o0p/view?usp=sharing" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">ICPC_Dhaka_Preliminary.pdf</a></p>
-            <p class="ml-4"><a href="https://drive.google.com/file/d/1-O9y3j4k5l6m7n8o9p0q1r2s3t4u5v6w/view?usp=sharing" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">HackerRank_Certificate.pdf</a></p>
+            <p class="ml-4"><a href="https://drive.google.com/file/d/1-afewOZmuXzM6bbGdfRYwW9JlfXUoMAB/view" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">2022-ICPC_Asia_Dhaka_Preliminary.pdf</a></p>
+            <p class="ml-4"><a href="https://drive.google.com/file/d/1fadr-hENkUy4EbFKtoRvAMrdJxy5HSMz/view" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">Intermediate_SQL_DataCamp.pdf</a></p>
+            <p class="ml-4"><a href="https://www.hackerrank.com/certificates/cd9ceaf303ac" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">HackerRank_Problem_Solving.pdf</a></p>
         `,
         'resume': `
             <p class="text-yellow-400">[RESUME (Latest Version)]</p>
-            <p><a href="https://drive.google.com/file/d/1TF89ERj2f18dSbctS-svVtLqr37uKYpr/view?usp=sharing" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">zahid_hasan_resume_2024.pdf</a></p>
+            <p><a href="https://drive.google.com/file/d/1TF89ERj2f18dSbctS-svVtLqr37uKYpr/view?usp=sharing" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">M._M._Zahid_Hasan_resume.pdf</a></p>
             <p>Last modified: Sep 07, 2025</p>
             <p>Size: 245 KB</p>
         `,
-        'certs': `
+        'certificates': `
             <p class="text-yellow-400">[CERTIFICATIONS]</p>
-            <p class="ml-4"><a href="https://drive.google.com/file/d/1-L3bS-9v0Y4t5i2P5i4j3k2l2m1n0o0p/view?usp=sharing" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">ICPC_Dhaka_Preliminary.pdf</a></p>
-            <p class="ml-4"><a href="https://drive.google.com/file/d/1-O9y3j4k5l6m7n8o9p0q1r2s3t4u5v6w/view?usp=sharing" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">HackerRank_Certificate.pdf</a></p>
+            <p class="ml-4"><a href="https://drive.google.com/file/d/1-afewOZmuXzM6bbGdfRYwW9JlfXUoMAB/view" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">2022-ICPC_Asia_Dhaka_Preliminary.pdf</a></p>
+            <p class="ml-4"><a href="https://drive.google.com/file/d/1fadr-hENkUy4EbFKtoRvAMrdJxy5HSMz/view" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">Intermediate_SQL_DataCamp.pdf</a></p>
+            <p class="ml-4"><a href="https://www.hackerrank.com/certificates/cd9ceaf303ac" target="_blank" rel="noopener noreferrer" download class="text-white hover:underline">HackerRank_Problem_Solving.pdf</a></p>
         `,
         'clear': () => {
             setOutput([]);
@@ -679,7 +716,7 @@ const Artifacts = () => {
         }
     };
 
-    const suggested = ['ls', 'resume', 'certs', 'ask "what are his skills?"', 'clear'];
+    const suggested = ['ls', 'resume', 'certificates', 'ask "what are his skills?"', 'clear'];
 
     useEffect(() => {
         if (terminalBodyRef.current) {
