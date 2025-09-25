@@ -769,86 +769,180 @@ const Artifacts = () => {
 };
 
 
+
 const Contact = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
-    const [submissionStatus, setSubmissionStatus] = useState(null);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [submissionStatus, setSubmissionStatus] = useState(null);
 
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        setFormData(prev => ({ ...prev, [id]: value }));
-    };
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
 
-    const handleSuggestMessage = async () => {
-        setIsLoading(true);
-        setError('');
-        const prompt = `You are a friendly assistant helping a user write a contact message to Zahid Hasan, a frontend developer. The user's name is "${formData.name || 'a visitor'}". Write a short, friendly, and professional message (about 2-3 sentences) asking about potential opportunities or collaborations. Keep it concise.`;
-        const suggestedMessage = await callGemini(prompt);
-        if (suggestedMessage.startsWith('Error:')) {
-            setError(suggestedMessage);
-        } else {
-            setFormData(prev => ({ ...prev, message: suggestedMessage }));
-        }
-        setIsLoading(false);
-    };
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // In a real app, you'd handle form submission here.
-        // For this demo, we can just log the data.
-        console.log("Form submitted:", formData);
-        setSubmissionStatus({ type: 'success', message: 'Thank you for your message!' });
-        setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setSubmissionStatus(null), 5000); // Clear message after 5 seconds
-    };
+  const handleSuggestMessage = async () => {
+    setIsLoading(true);
+    setError("");
+    const prompt = `You are a friendly assistant helping a user write a contact message to Zahid Hasan, a frontend developer. The user's name is "${formData.name || "a visitor"}". Write a short, friendly, and professional message (about 2-3 sentences) asking about potential opportunities or collaborations. Keep it concise.`;
+    const suggestedMessage = await callGemini(prompt);
+    if (suggestedMessage.startsWith("Error:")) {
+      setError(suggestedMessage);
+    } else {
+      setFormData((prev) => ({ ...prev, message: suggestedMessage }));
+    }
+    setIsLoading(false);
+  };
 
-    return (
-        <section id="contact" className="py-24">
-            <div className="text-center mb-12">
-                <p className="text-sm text-[var(--secondary-color)] mb-2">Have questions or ideas? Let's talk.</p>
-                 <h2 className="text-4xl font-bold text-white">Get in Touch – Let's Connect</h2>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Netlify will handle submission automatically
+    console.log("Form submitted:", formData);
+    setSubmissionStatus({
+      type: "success",
+      message: "Thank you for your message!",
+    });
+    setFormData({ name: "", email: "", message: "" });
+    setTimeout(() => setSubmissionStatus(null), 5000);
+  };
+
+  return (
+    <section id="contact" className="py-24">
+      <div className="text-center mb-12">
+        <p className="text-sm text-[var(--secondary-color)] mb-2">
+          Have questions or ideas? Let's talk.
+        </p>
+        <h2 className="text-4xl font-bold text-white">
+          Get in Touch – Let's Connect
+        </h2>
+      </div>
+      <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+        <div className="bg-[var(--card-bg)]/80 backdrop-blur-md p-8 rounded-2xl border border-cyan-700/50">
+          {/* ✅ Netlify form setup */}
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            onSubmit={handleSubmit}
+          >
+            {/* Hidden input required by Netlify */}
+            <input type="hidden" name="form-name" value="contact" />
+
+            <div className="mb-6">
+              <label
+                htmlFor="name"
+                className="block mb-2 text-sm font-medium text-gray-300"
+              >
+                Your name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="bg-gray-700/80 border border-cyan-600/50 text-gray-300 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-3"
+                placeholder="What's your good name?"
+                required
+              />
             </div>
-            <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-                <div className="bg-[var(--card-bg)]/80 backdrop-blur-md p-8 rounded-2xl border border-cyan-700/50">
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-6">
-                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-300">Your name</label>
-                            <input type="text" id="name" value={formData.name} onChange={handleInputChange} className="bg-gray-700/80 border border-cyan-600/50 text-gray-300 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-3" placeholder="What's your good name?" />
-                        </div>
-                        <div className="mb-6">
-                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-300">Your email</label>
-                            <input type="email" id="email" value={formData.email} onChange={handleInputChange} className="bg-gray-700/80 border border-cyan-600/50 text-gray-300 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-3" placeholder="What's your email address?" />
-                        </div>
-                        <div className="mb-6">
-                             <div className="flex justify-between items-center mb-2">
-                                 <label htmlFor="message" className="text-sm font-medium text-gray-300">Your message</label>
-                                 <button type="button" onClick={handleSuggestMessage} disabled={isLoading} className="text-xs text-[var(--primary-color)] hover:underline disabled:opacity-50 disabled:cursor-not-allowed">
-                                     {isLoading ? 'Generating...' : '✨ Suggest with AI'}
-                                 </button>
-                             </div>
-                             <textarea id="message" rows="4" value={formData.message} onChange={handleInputChange} className="bg-gray-700/80 border border-cyan-600/50 text-gray-300 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-3" placeholder="How can I help you?"></textarea>
-                        </div>
-                        {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
-                        {submissionStatus && (
-                            <div className={`p-3 rounded-lg mb-4 text-sm ${submissionStatus.type === 'success' ? 'bg-green-900/50 text-green-300' : 'bg-red-900/50 text-red-300'}`}>
-                                {submissionStatus.message}
-                            </div>
-                        )}
-                        <button type="submit" className="w-full text-black bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center flex items-center justify-center transition-colors group">
-                            Send message
-                            <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </button>
-                    </form>
-                </div>
-                <div className="hidden md:flex items-center justify-center">
-                    <img src={connect} alt="Contact illustration with network nodes" className="rounded-2xl object-contain w-full h-full max-h-[550px]" />
-                </div>
+
+            <div className="mb-6">
+              <label
+                htmlFor="email"
+                className="block mb-2 text-sm font-medium text-gray-300"
+              >
+                Your email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="bg-gray-700/80 border border-cyan-600/50 text-gray-300 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-3"
+                placeholder="What's your email address?"
+                required
+              />
             </div>
-        </section>
-    );
+
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <label
+                  htmlFor="message"
+                  className="text-sm font-medium text-gray-300"
+                >
+                  Your message
+                </label>
+                <button
+                  type="button"
+                  onClick={handleSuggestMessage}
+                  disabled={isLoading}
+                  className="text-xs text-[var(--primary-color)] hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? "Generating..." : "✨ Suggest with AI"}
+                </button>
+              </div>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                value={formData.message}
+                onChange={handleInputChange}
+                className="bg-gray-700/80 border border-cyan-600/50 text-gray-300 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-3"
+                placeholder="How can I help you?"
+                required
+              ></textarea>
+            </div>
+
+            {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
+
+            {submissionStatus && (
+              <div
+                className={`p-3 rounded-lg mb-4 text-sm ${
+                  submissionStatus.type === "success"
+                    ? "bg-green-900/50 text-green-300"
+                    : "bg-red-900/50 text-red-300"
+                }`}
+              >
+                {submissionStatus.message}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="w-full text-black bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center flex items-center justify-center transition-colors group"
+            >
+              Send message
+              <svg
+                className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <div className="hidden md:flex items-center justify-center">
+          <img
+            src={connect}
+            alt="Contact illustration with network nodes"
+            className="rounded-2xl object-contain w-full h-full max-h-[550px]"
+          />
+        </div>
+      </div>
+    </section>
+  );
 };
-
 const Footer = () => (
     <footer className="py-8 border-t border-cyan-800/50">
         <div className="container mx-auto px-6 flex justify-between items-center text-gray-400">
