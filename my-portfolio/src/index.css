@@ -121,3 +121,87 @@ body {
     border: 3px solid var(--primary-color);
 }
 
+/* Mockup Device Styling (Responsive & Overflow Free) */
+.laptop-frame {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.laptop-screen-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 62%; /* Screen aspect ratio */
+    background: #0a0a0f;
+    border-radius: 12px 12px 0 0;
+    border: 6px solid #27272a;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.laptop-screen-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #000;
+}
+
+.laptop-base {
+    position: relative;
+    width: 108%;
+    height: 8px;
+    margin-left: -4%;
+    background: linear-gradient(to bottom, #3f3f46, #18181b);
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid #71717a;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.laptop-hinge {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 16%;
+    height: 4px;
+    background: #18181b;
+    border-radius: 0 0 4px 4px;
+}
+
+.phone-frame {
+    position: relative;
+    width: 140px;
+    height: 280px;
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    border-radius: 32px;
+    border: 3px solid #334155;
+    box-shadow: 0 0 0 1px #0f172a, 0 15px 45px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+    flex-shrink: 0;
+}
+
+.phone-screen {
+    position: absolute;
+    top: 6px; left: 6px; right: 6px; bottom: 6px;
+    border-radius: 26px;
+    overflow: hidden;
+    background: #000;
+}
+
+@media (max-width: 480px) {
+    .laptop-frame {
+        max-width: 280px;
+    }
+    .laptop-base {
+        width: 104%;
+        margin-left: -2%;
+    }
+    .phone-frame {
+        width: 110px;
+        height: 220px;
+        border-radius: 24px;
+    }
+    .phone-screen {
+        top: 4px; left: 4px; right: 4px; bottom: 4px;
+        border-radius: 18px;
+    }
+}
+
